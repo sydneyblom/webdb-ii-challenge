@@ -12,8 +12,20 @@ router.post('/',  (req, res) => {
       res.status(201).json(ids);
     })
     .catch(error => {
-      res.status(500).json({ error: 'Failed to add account' });
+      res.status(500).json({ error: 'Failed to add car' });
     });
+});
+
+router.get('/', (req, res) => {
+    DB.select('*')
+    //returns a promise once gets post sends it back to the client
+    .from('cars')
+    .then(car => {
+        res.status(200).json(car) 
+    })
+    .catch(error =>  {
+        res.status(500).json({message: "Failed to get cars from DB"})
+    })
 });
 
 router.get('/:id', (req, res) => {
